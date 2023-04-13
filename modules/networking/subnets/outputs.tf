@@ -8,7 +8,13 @@ output "restAPI_privateID" {
   value       = aws_subnet.restAPI_private.id
 }
 
+output "restAPI_private_cidr" {
+  description = "The CIDR block of the private api subnet"
+  value       = aws_subnet.restAPI_private.cidr_block
+}
+
 output "NAT_publicID" {
   description = "The public NAT subnet ID"
   value       = aws_subnet.NAT.id
 }
+

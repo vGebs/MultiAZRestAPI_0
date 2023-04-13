@@ -25,7 +25,7 @@ This system is a single-tier architecture with logically isolated subnets.
 
 3. aws_subnet.NAT
 - This is the NAT Gateway
-- It has its own logically isolated subnet with a default mask of "/28"
+- It has its own logically isolated subnet with a default mask of "/29"
 - Accepts traffic from *aws_subnet.restAPI_private*
 - Can send requests through internet gateway
 
