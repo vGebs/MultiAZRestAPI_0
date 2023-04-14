@@ -1,0 +1,3 @@
+module "sgs" {
+  source = "./securitygroups"
+}
