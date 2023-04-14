@@ -16,38 +16,14 @@ module "route_tables" {
   public_subnet_id    = module.subnets.NAT_publicID
 }
 
-# resource "aws_route_table" "app_route" {
-#   vpc_id = module.vpc.vpc_ID
+# we need to ad NACLs to each subnet now
+module "nacls" {
+  source = "./nacls"
 
-#   route {
-#     cidr_block     = "0.0.0.0/0"
-#     nat_gateway_id = module.subnets.NAT_publicID
-#   }
-
-#   tags = {
-#     Name = "App server Route"
-#   }
-# }
-
-# resource "aws_route_table_association" "app_route" {
-#   subnet_id      = module.subnets.restAPI_privateID
-#   route_table_id = aws_route_table.app_route.id
-# }
-
-# resource "aws_route_table" "public" {
-#   vpc_id = module.vpc.vpc_ID
-
-#   route {
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = module.vpc.igw_ID
-#   }
-
-#   tags = {
-#     Name = "Public Route Table"
-#   }
-# }
-
-# resource "aws_route_table_association" "NAT" {
-#   subnet_id      = module.subnets.NAT_publicID
-#   route_table_id = aws_route_table.public.id
-# }
+  vpc_id                       = module.vpc.vpc_ID
+  private_subnet_cidr          = module.subnets.restAPI_private_cidr
+  public_lb_subnet_cidr        = module.subnets.loadBalancer_subnet_cidr
+  lb_public_subnet_id          = module.subnets.loadBalancer_publicID
+  app_private_subnet_id        = module.subnets.restAPI_privateID
+  nat_gateway_public_subnet_id = module.subnets.NAT_publicID
+}

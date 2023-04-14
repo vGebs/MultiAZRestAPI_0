@@ -3,6 +3,11 @@ output "loadBalancer_publicID" {
   value       = aws_subnet.loadBalancer_public.id
 }
 
+output "loadBalancer_subnet_cidr" {
+  description = "The CIDR of the load balancer subnet"
+  value       = aws_subnet.loadBalancer_public.cidr_block
+}
+
 output "restAPI_privateID" {
   description = "The rest api private subnet ID"
   value       = aws_subnet.restAPI_private.id
@@ -18,3 +23,7 @@ output "NAT_publicID" {
   value       = aws_subnet.NAT.id
 }
 
+output "NAT_public_subnet_cidr" {
+  description = "The CIDR of the NAT gateway subnet"
+  value       = aws_subnet.NAT.cidr_block
+}
