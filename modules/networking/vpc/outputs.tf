@@ -7,3 +7,8 @@ output "igw_ID" {
   description = "The internet gateway ID"
   value       = aws_internet_gateway.gw.id
 }
+
+output "igw" {
+  description = "The internet gateway"
+  value       = aws_internet_gateway.gw
+}

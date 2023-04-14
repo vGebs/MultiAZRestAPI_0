@@ -8,7 +8,8 @@ module "subnets" {
 }
 
 module "route_tables" {
-  source              = "./route_tables"
+  source = "./route_tables"
+
   vpc_id              = module.vpc.vpc_ID
   nat_gateway_id      = module.subnets.NAT_publicID
   internet_gateway_id = module.vpc.igw_ID
@@ -26,4 +27,10 @@ module "nacls" {
   lb_public_subnet_id          = module.subnets.loadBalancer_publicID
   app_private_subnet_id        = module.subnets.restAPI_privateID
   nat_gateway_public_subnet_id = module.subnets.NAT_publicID
+}
+
+module "nat" {
+  source = "./nat"
+
+  subnet_id = module.subnets.NAT_publicID
 }
